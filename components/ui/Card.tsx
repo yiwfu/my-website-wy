@@ -70,7 +70,7 @@ export function Card({
                         />
                         {/* Image Overlay */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        
+
                         {/* Loading Skeleton */}
                         {!imageLoaded && (
                             <div className="absolute inset-0 bg-gradient-secondary animate-pulse" />
@@ -98,8 +98,8 @@ export function Card({
                 {/* Tag Badge */}
                 {tag && (
                     <div className="absolute top-4 left-4">
-                        <Badge 
-                            variant="secondary" 
+                        <Badge
+                            variant="secondary"
                             className="glass text-foreground backdrop-blur-md shadow-sm border-border/50 font-medium px-3 py-1"
                         >
                             {tag}
@@ -142,7 +142,7 @@ export function Card({
                                 </div>
                             )}
                         </div>
-                        
+
                         {/* Hover Indicator */}
                         <div className={cn(
                             "w-2 h-2 rounded-full bg-primary transition-all duration-300",
@@ -154,7 +154,7 @@ export function Card({
 
             {/* Animated Border */}
             <div className="absolute inset-0 rounded-2xl border-2 border-primary/0 group-hover:border-primary/20 transition-all duration-500 pointer-events-none" />
-            
+
             {/* Glow Effect */}
             <div className="absolute inset-0 rounded-2xl bg-gradient-primary opacity-0 group-hover:opacity-5 transition-opacity duration-500 pointer-events-none" />
         </Link>

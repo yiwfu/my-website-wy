@@ -20,25 +20,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Check active session
-        getSession().then(({ session }) => {
-            setUser(session?.user ?? null);
-            if (session?.user) {
-                fetchProfile(session.user.id);
-            } else {
-                setLoading(false);
-            }
-        });
-
         // Listen for auth changes
+        // onAuthStateChange will fire immediately with the current session
         const { data: { subscription } } = onAuthStateChange(async (event, session) => {
             setUser(session?.user ?? null);
             if (session?.user) {
                 await fetchProfile(session.user.id);
             } else {
                 setProfile(null);
+                setLoading(false);
             }
-            setLoading(false);
         });
 
         return () => {

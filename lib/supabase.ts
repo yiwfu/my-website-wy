@@ -60,6 +60,7 @@ export interface RealEstate {
 }
 
 export interface Job {
+    image_url: string | null;
     id: string;
     title: string;
     description: string;

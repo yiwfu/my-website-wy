@@ -177,7 +177,7 @@ export default function RecruitmentPage() {
                                             key={item.id}
                                             title={item.title}
                                             description={item.description}
-                                            image={item.image_url} // 职位通常不需要图片
+                                            image={item.image_url || undefined}
                                             href={`/recruitment/${item.id}`}
                                             tag={item.salary_range || item.category}
                                             rating={4.1 + Math.random() * 0.9}
