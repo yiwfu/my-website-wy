@@ -1,8 +1,8 @@
 import { createClient } from '@supabase/supabase-js';
 
 // Supabase client configuration
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+const supabaseUrl = "https://jyugjvcauvmcrgkrgrvo.supabase.co"; // process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+const supabaseAnonKey = "sb_publishable_3o4H0Xc546HLNME13BzHQg_H5i3e4-s"; //process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 
 // Debug logging
 console.log('Supabase URL:', supabaseUrl ? '✓ Set' : '✗ Missing');
