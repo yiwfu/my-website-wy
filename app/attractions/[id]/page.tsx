@@ -1,0 +1,374 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
+import { getAttractionById } from "@/lib/data";
+import type { Attraction } from "@/lib/supabase";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { 
+    ArrowLeft, 
+    Star, 
+    MapPin, 
+    Camera, 
+    Share2, 
+    Heart, 
+    Clock, 
+    Users, 
+    Sparkles,
+    Navigation,
+    Phone,
+    Globe
+} from "lucide-react";
+
+export default function AttractionDetailPage() {
+    const params = useParams();
+    const router = useRouter();
+    const [attraction, setAttraction] = useState<Attraction | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [imageLoaded, setImageLoaded] = useState(false);
+
+    useEffect(() => {
+        async function loadAttraction() {
+            if (params.id) {
+                const data = await getAttractionById(params.id as string);
+                setAttraction(data);
+                setLoading(false);
+            }
+        }
+        loadAttraction();
+    }, [params.id]);
+
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-background">
+                {/* Header Skeleton */}
+                <div className="relative h-96 bg-gradient-secondary">
+                    <Skeleton className="w-full h-full" />
+                </div>
+                
+                {/* Content Skeleton */}
+                <div className="container-modern py-8">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <div className="lg:col-span-2 space-y-6">
+                            <Skeleton className="h-8 w-3/4" />
+                            <Skeleton className="h-4 w-full" />
+                            <Skeleton className="h-4 w-2/3" />
+                            <Skeleton className="h-32 w-full" />
+                        </div>
+                        <div className="space-y-4">
+                            <Skeleton className="h-48 w-full rounded-2xl" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    if (!attraction) {
+        return (
+            <div className="min-h-screen bg-background flex items-center justify-center">
+                <div className="text-center">
+                    <div className="w-32 h-32 bg-gradient-secondary rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <MapPin className="w-16 h-16 text-muted-foreground/50" />
+                    </div>
+                    <h1 className="text-2xl font-bold text-foreground mb-2">景点未找到</h1>
+                    <p className="text-muted-foreground mb-6">抱歉，我们找不到您要查看的景点信息</p>
+                    <Button onClick={() => router.back()} className="btn-modern text-white">
+                        <ArrowLeft className="w-4 h-4 mr-2" />
+                        返回上页
+                    </Button>
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <div className="min-h-screen bg-background">
+            {/* Hero Image Section */}
+            <section className="relative h-96 lg:h-[500px] overflow-hidden">
+                {attraction.image_url ? (
+                    <>
+                        <Image
+                            src={attraction.image_url}
+                            alt={attraction.title}
+                            fill
+                            className={`object-cover transition-opacity duration-700 ${
+                                imageLoaded ? "opacity-100" : "opacity-0"
+                            }`}
+                            onLoad={() => setImageLoaded(true)}
+                            priority
+                        />
+                        {!imageLoaded && (
+                            <div className="absolute inset-0 bg-gradient-secondary animate-pulse" />
+                        )}
+                    </>
+                ) : (
+                    <div className="w-full h-full bg-gradient-secondary flex items-center justify-center">
+                        <Camera className="w-24 h-24 text-muted-foreground/30" />
+                    </div>
+                )}
+                
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                
+                {/* Navigation Bar */}
+                <div className="absolute top-0 left-0 right-0 z-10 p-4 lg:p-6">
+                    <div className="flex items-center justify-between">
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => router.back()}
+                            className="glass border-white/20 text-white hover:bg-white/10"
+                        >
+                            <ArrowLeft className="w-4 h-4 mr-2" />
+                            返回
+                        </Button>
+                        
+                        <div className="flex items-center gap-2">
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                className="glass border-white/20 text-white hover:bg-white/10"
+                            >
+                                <Heart className="w-4 h-4" />
+                            </Button>
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                className="glass border-white/20 text-white hover:bg-white/10"
+                            >
+                                <Share2 className="w-4 h-4" />
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Title Overlay */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 lg:p-8">
+                    <div className="container-modern">
+                        <div className="flex items-end justify-between">
+                            <div>
+                                <Badge className="mb-3 bg-primary/20 text-white border-white/20">
+                                    {attraction.category}
+                                </Badge>
+                                <h1 className="text-3xl lg:text-5xl font-bold text-white mb-2">
+                                    {attraction.title}
+                                </h1>
+                                {attraction.location && (
+                                    <div className="flex items-center text-white/90">
+                                        <MapPin className="w-5 h-5 mr-2" />
+                                        <span className="text-lg">{attraction.location}</span>
+                                    </div>
+                                )}
+                            </div>
+                            
+                            {/* Rating Badge */}
+                            <div className="glass rounded-2xl p-4 text-center border-white/20">
+                                <div className="flex items-center justify-center mb-1">
+                                    <Star className="w-5 h-5 text-yellow-400 fill-current mr-1" />
+                                    <span className="text-2xl font-bold text-white">
+                                        {attraction.rating.toFixed(1)}
+                                    </span>
+                                </div>
+                                <p className="text-white/80 text-sm">景点评分</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Main Content */}
+            <main className="container-modern py-8 lg:py-12">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+                    {/* Left Column - Main Content */}
+                    <div className="lg:col-span-2 space-y-8">
+                        {/* AI Recommendation */}
+                        <div className="glass rounded-2xl p-6 border border-border/30">
+                            <div className="flex items-center mb-4">
+                                <div className="w-10 h-10 rounded-full bg-gradient-primary flex items-center justify-center mr-3">
+                                    <Sparkles className="w-5 h-5 text-white" />
+                                </div>
+                                <div>
+                                    <h3 className="font-semibold text-foreground">AI 智能推荐</h3>
+                                    <p className="text-sm text-muted-foreground">
+                                        匹配度 {attraction.ai_score}%
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="w-full bg-secondary rounded-full h-2 mb-3">
+                                <div 
+                                    className="bg-gradient-primary h-2 rounded-full transition-all duration-1000"
+                                    style={{ width: `${attraction.ai_score}%` }}
+                                />
+                            </div>
+                            <p className="text-muted-foreground">
+                                基于您的偏好和当前热门趋势，这个景点非常适合您！
+                            </p>
+                        </div>
+
+                        {/* Description */}
+                        <div className="space-y-4">
+                            <h2 className="text-2xl font-bold text-foreground">景点介绍</h2>
+                            <div className="prose prose-gray max-w-none">
+                                <p className="text-muted-foreground leading-relaxed text-lg">
+                                    {attraction.description}
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Features Grid */}
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            {[
+                                { icon: Users, label: "适合人群", value: "全年龄段" },
+                                { icon: Clock, label: "建议游玩", value: "2-3小时" },
+                                { icon: Camera, label: "拍照指数", value: "★★★★★" },
+                                { icon: Navigation, label: "交通便利", value: "地铁直达" }
+                            ].map((feature, index) => (
+                                <div key={index} className="glass rounded-xl p-4 text-center border border-border/30">
+                                    <feature.icon className="w-8 h-8 text-primary mx-auto mb-2" />
+                                    <p className="text-sm text-muted-foreground mb-1">{feature.label}</p>
+                                    <p className="font-semibold text-foreground">{feature.value}</p>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Reviews Section */}
+                        <div className="space-y-6">
+                            <h2 className="text-2xl font-bold text-foreground">游客评价</h2>
+                            <div className="space-y-4">
+                                {[
+                                    {
+                                        name: "张小明",
+                                        rating: 5,
+                                        comment: "景色非常美，值得一去！拍照效果很棒，推荐给朋友们。",
+                                        date: "2024-12-20"
+                                    },
+                                    {
+                                        name: "李美丽",
+                                        rating: 4,
+                                        comment: "环境很好，就是人比较多。建议早点去，避开高峰期。",
+                                        date: "2024-12-18"
+                                    }
+                                ].map((review, index) => (
+                                    <div key={index} className="glass rounded-xl p-6 border border-border/30">
+                                        <div className="flex items-center justify-between mb-3">
+                                            <div className="flex items-center">
+                                                <div className="w-10 h-10 rounded-full bg-gradient-secondary flex items-center justify-center mr-3">
+                                                    <span className="text-sm font-semibold">
+                                                        {review.name.charAt(0)}
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <p className="font-semibold text-foreground">{review.name}</p>
+                                                    <div className="flex items-center">
+                                                        {[...Array(5)].map((_, i) => (
+                                                            <Star
+                                                                key={i}
+                                                                className={`w-4 h-4 ${
+                                                                    i < review.rating
+                                                                        ? "text-yellow-400 fill-current"
+                                                                        : "text-gray-300"
+                                                                }`}
+                                                            />
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <span className="text-sm text-muted-foreground">{review.date}</span>
+                                        </div>
+                                        <p className="text-muted-foreground">{review.comment}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Right Column - Sidebar */}
+                    <div className="space-y-6">
+                        {/* Quick Info Card */}
+                        <div className="glass rounded-2xl p-6 border border-border/30">
+                            <h3 className="text-xl font-bold text-foreground mb-4">景点信息</h3>
+                            
+                            <div className="space-y-4">
+                                <div className="flex items-center">
+                                    <MapPin className="w-5 h-5 text-primary mr-3" />
+                                    <div>
+                                        <p className="text-sm text-muted-foreground">地址</p>
+                                        <p className="font-medium text-foreground">
+                                            {attraction.location || "地址信息待更新"}
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                                <div className="flex items-center">
+                                    <Clock className="w-5 h-5 text-primary mr-3" />
+                                    <div>
+                                        <p className="text-sm text-muted-foreground">开放时间</p>
+                                        <p className="font-medium text-foreground">09:00 - 18:00</p>
+                                    </div>
+                                </div>
+                                
+                                <div className="flex items-center">
+                                    <Phone className="w-5 h-5 text-primary mr-3" />
+                                    <div>
+                                        <p className="text-sm text-muted-foreground">联系电话</p>
+                                        <p className="font-medium text-foreground">400-123-4567</p>
+                                    </div>
+                                </div>
+                                
+                                <div className="flex items-center">
+                                    <Globe className="w-5 h-5 text-primary mr-3" />
+                                    <div>
+                                        <p className="text-sm text-muted-foreground">官方网站</p>
+                                        <p className="font-medium text-primary">www.example.com</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="mt-6 space-y-3">
+                                <Button className="w-full btn-modern text-white">
+                                    <Navigation className="w-4 h-4 mr-2" />
+                                    导航前往
+                                </Button>
+                                <Button variant="outline" className="w-full">
+                                    <Phone className="w-4 h-4 mr-2" />
+                                    立即咨询
+                                </Button>
+                            </div>
+                        </div>
+
+                        {/* Related Attractions */}
+                        <div className="glass rounded-2xl p-6 border border-border/30">
+                            <h3 className="text-xl font-bold text-foreground mb-4">相关推荐</h3>
+                            <div className="space-y-3">
+                                {[1, 2, 3].map((item) => (
+                                    <Link
+                                        key={item}
+                                        href="#"
+                                        className="flex items-center p-3 rounded-xl hover:bg-muted/50 transition-colors"
+                                    >
+                                        <div className="w-12 h-12 rounded-lg bg-gradient-secondary mr-3" />
+                                        <div className="flex-1">
+                                            <p className="font-medium text-foreground text-sm">
+                                                推荐景点 {item}
+                                            </p>
+                                            <p className="text-xs text-muted-foreground">距离 2.5km</p>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <Star className="w-3 h-3 text-yellow-400 fill-current mr-1" />
+                                            <span className="text-xs font-medium">4.8</span>
+                                        </div>
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    );
+}
