@@ -1,14 +1,12 @@
 "use client";
 
 import Link from 'next/link';
-import { Bot, MapPin, Sparkles, Menu, X, Search } from 'lucide-react';
-import { useAi } from '@/context/AiContext';
+import { MapPin, Menu, X, Search } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import UserMenu from '@/components/UserMenu';
 
 export default function Header() {
-    const { open } = useAi();
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const pathname = usePathname();
@@ -48,7 +46,7 @@ export default function Header() {
                                     <div className="absolute inset-0 rounded-full bg-gradient-primary opacity-0 group-hover:opacity-20 blur-lg transition-opacity duration-300"></div>
                                 </div>
                                 <span className="hidden font-bold tracking-tight sm:inline-block text-xl text-foreground group-hover:text-gradient transition-all duration-300">
-                                    文旅门户
+                                    滃缘网
                                 </span>
                             </Link>
 
@@ -86,21 +84,7 @@ export default function Header() {
                                 </kbd>
                             </button>
 
-                            {/* AI Chat Button - Desktop */}
-                            <button
-                                onClick={open}
-                                className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full glass hover:bg-muted/20 border border-border/30 text-sm text-muted-foreground transition-all duration-300 hover:text-foreground hover:shadow-md group"
-                            >
-                                <Sparkles className="w-4 h-4 text-primary group-hover:animate-pulse" />
-                                <span>问AI...</span>
-                            </button>
 
-                            <button
-                                onClick={open}
-                                className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gradient-primary text-gradient hover:scale-105 transition-all duration-300 shadow-colored hover:shadow-xl group"
-                            >
-                                <Bot className="h-5 w-5 group-hover:animate-pulse" />
-                            </button>
 
                             {/* User Menu */}
                             <UserMenu />
@@ -152,25 +136,13 @@ export default function Header() {
 
                             <div className="mt-6 pt-6 border-t border-border/50">
                                 <button
-                                    onClick={() => {
-                                        open();
-                                        setIsMobileMenuOpen(false);
-                                    }}
+                                    onClick={() => setIsMobileMenuOpen(false)}
                                     className="flex items-center gap-3 w-full px-4 py-3 rounded-xl text-base font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-300"
                                 >
                                     <Search className="w-5 h-5 text-muted-foreground" />
                                     搜索内容
                                 </button>
-                                <button
-                                    onClick={() => {
-                                        open();
-                                        setIsMobileMenuOpen(false);
-                                    }}
-                                    className="flex items-center gap-3 w-full px-4 py-3 rounded-xl text-base font-medium text-primary hover:bg-primary/10 transition-all duration-300 mt-1"
-                                >
-                                    <Sparkles className="w-5 h-5 text-primary" />
-                                    AI 助手
-                                </button>
+
                             </div>
                         </nav>
                     </div>

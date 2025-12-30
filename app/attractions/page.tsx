@@ -36,10 +36,7 @@ export default function AttractionsPage() {
 
                 <div className="container-modern relative z-10">
                     <div className="max-w-4xl mx-auto text-center animate-fade-in">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6">
-                            <Sparkles className="w-4 h-4 text-primary" />
-                            <span className="text-sm font-medium">AI 智能推荐</span>
-                        </div>
+    
 
                         <h1 className="text-4xl md:text-6xl font-bold mb-6">
                             发现城市
@@ -47,7 +44,7 @@ export default function AttractionsPage() {
                         </h1>
 
                         <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
-                            AI 已为您精选 128 个热门打卡地。在这个季节，我们推荐您去海边吹吹风
+                            精选 128 个热门打卡地。在这个季节，我们推荐您去海边吹吹风
                         </p>
 
                         {/* Category Tags */}
@@ -108,10 +105,6 @@ export default function AttractionsPage() {
                                     <List className="w-4 h-4" />
                                 </button>
                             </div>
-
-                            <Button className="btn-modern text-white px-6 hover-lift">
-                                <Map className="w-4 h-4 mr-2" /> 地图模式
-                            </Button>
                         </div>
                     </div>
                 </div>
@@ -166,7 +159,6 @@ export default function AttractionsPage() {
                                             description={item.description}
                                             image={item.image_url || undefined}
                                             href={`/attractions/${item.id}`}
-                                            tag={`${item.ai_score || 95}% 匹配`}
                                             rating={4.5}
                                             views={Math.floor(Math.random() * 5000) + 500}
                                             className="animate-scale-in hover-lift"
@@ -197,7 +189,6 @@ export default function AttractionsPage() {
                                             <h3 className="text-xl font-bold text-foreground mb-2">{item.title}</h3>
                                             <p className="text-muted-foreground mb-4">{item.description}</p>
                                             <div className="flex items-center gap-4">
-                                                <span className="text-sm text-primary font-medium">95% 匹配</span>
                                                 <span className="text-sm text-muted-foreground">4.5★</span>
                                                 <span className="text-sm text-muted-foreground">1.2k 浏览</span>
                                             </div>

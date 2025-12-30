@@ -38,7 +38,7 @@ export default function RecruitmentPage() {
                     <div className="max-w-4xl mx-auto text-center animate-fade-in">
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6">
                             <Briefcase className="w-4 h-4 text-primary" />
-                            <span className="text-sm font-medium">智能职位匹配</span>
+                            <span className="text-sm font-medium">职位匹配</span>
                         </div>
 
                         <h1 className="text-4xl md:text-6xl font-bold mb-6">
@@ -47,7 +47,7 @@ export default function RecruitmentPage() {
                         </h1>
 
                         <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
-                            AI 为您推荐最匹配的职位机会，从初级岗位到高管职位，开启职业新篇章
+                            为您推荐最匹配的职位机会，从初级岗位到高管职位，开启职业新篇章
                         </p>
 
                         {/* Category Tags */}

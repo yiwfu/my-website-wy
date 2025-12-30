@@ -193,7 +193,7 @@ export default function AttractionDetailPage() {
                                     <Sparkles className="w-5 h-5 text-white" />
                                 </div>
                                 <div>
-                                    <h3 className="font-semibold text-foreground">AI 智能推荐</h3>
+                                    <h3 className="font-semibold text-foreground">智能推荐</h3>
                                     <p className="text-sm text-muted-foreground">
                                         匹配度 {attraction.ai_score}%
                                     </p>

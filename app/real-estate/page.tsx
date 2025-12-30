@@ -38,7 +38,7 @@ export default function RealEstatePage() {
                     <div className="max-w-4xl mx-auto text-center animate-fade-in">
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6">
                             <Home className="w-4 h-4 text-primary" />
-                            <span className="text-sm font-medium">智能房产推荐</span>
+                            <span className="text-sm font-medium">房产推荐</span>
                         </div>
 
                         <h1 className="text-4xl md:text-6xl font-bold mb-6">
@@ -47,7 +47,7 @@ export default function RealEstatePage() {
                         </h1>
 
                         <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
-                            AI 为您精选优质房源，从温馨公寓到豪华别墅，找到最适合您的梦想家园
+                            精选优质房源，从温馨公寓到豪华别墅，找到最适合您的梦想家园
                         </p>
 
                         {/* Category Tags */}
@@ -108,10 +108,6 @@ export default function RealEstatePage() {
                                     <List className="w-4 h-4" />
                                 </button>
                             </div>
-
-                            <Button className="btn-modern text-white px-6 hover-lift">
-                                <MapPin className="w-4 h-4 mr-2" /> 地图找房
-                            </Button>
                         </div>
                     </div>
                 </div>

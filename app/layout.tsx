@@ -4,7 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Providers } from "@/components/Providers";
-import { AiChatWidget } from "@/components/AiChatWidget";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,8 +17,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AI Cultural Tourism Portal",
-  description: "Discover attractions, food, and culture with AI.",
+  title: "Cultural Tourism Portal",
+  description: "Discover attractions, food, and culture.",
 };
 
 export default function RootLayout({
@@ -37,7 +37,6 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
-          <AiChatWidget />
         </Providers>
       </body>
     </html>

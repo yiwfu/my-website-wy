@@ -29,10 +29,10 @@ export default function Footer() {
                                 <div className="w-10 h-10 rounded-full bg-gradient-primary flex items-center justify-center shadow-colored">
                                     <MapPin className="w-5 h-5 text-white" />
                                 </div>
-                                <span className="text-xl font-bold text-foreground">文旅门户</span>
+                                <span className="text-xl font-bold text-foreground">滃缘网</span>
                             </div>
                             <p className="text-muted-foreground mb-6 leading-relaxed">
-                                AI 驱动的智能城市生活指南，为您提供最权威的景点推荐、地道美食地图、优质房产信息及高薪职场机会。
+                                智能城市生活指南，为您提供最权威的景点推荐、地道美食地图、优质房产信息及高薪职场机会。
                             </p>
                             <div className="flex items-center gap-4">
                                 {[
@@ -65,7 +65,6 @@ export default function Footer() {
                                     { label: '地道美食', href: '/food' },
                                     { label: '精选房源', href: '/real-estate' },
                                     { label: '职场机遇', href: '/recruitment' },
-                                    { label: 'AI 助手', href: '#' },
                                     { label: '个人中心', href: '#' }
                                 ].map((link, i) => (
                                     <li key={i}>
@@ -91,7 +90,6 @@ export default function Footer() {
                                     { label: '常见问题', href: '#' },
                                     { label: '意见反馈', href: '#' },
                                     { label: '商务合作', href: '#' },
-                                    { label: '开发者API', href: '#' }
                                 ].map((link, i) => (
                                     <li key={i}>
                                         <Link
@@ -122,12 +120,12 @@ export default function Footer() {
                                     </div>
                                     <span>400-123-4567</span>
                                 </div>
-                                <div className="flex items-start gap-3 text-muted-foreground">
+                                {/* <div className="flex items-start gap-3 text-muted-foreground">
                                     <div className="w-8 h-8 rounded-lg glass border border-border/30 flex items-center justify-center mt-0.5">
                                         <MapPin className="w-4 h-4" />
                                     </div>
-                                    <span>北京市朝阳区科技园区<br />创新大厦 A 座 12 层</span>
-                                </div>
+                                    <span>创新大厦 A 座 12 层</span>
+                                </div> */}
                             </div>
 
                             {/* Newsletter */}
@@ -153,7 +151,7 @@ export default function Footer() {
                     <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                         <div className="flex flex-col md:flex-row items-center gap-4 text-sm text-muted-foreground">
                             <p className="flex items-center gap-1">
-                                © {currentYear} 文旅门户. Made with <Heart className="w-4 h-4 text-red-500 fill-current" /> by Antigravity
+                                © {currentYear} 滃缘网
                             </p>
                             <div className="flex items-center gap-4">
                                 <Link href="#" className="hover:text-primary transition-colors duration-300">隐私政策</Link>
@@ -182,12 +180,6 @@ export default function Footer() {
                             <span>ICP备案号：京ICP备12345678号</span>
                             <span>•</span>
                             <span>网络文化经营许可证：京网文[2023]1234-567号</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <span>Powered by</span>
-                            <span className="text-gradient font-semibold">Next.js</span>
-                            <span>&</span>
-                            <span className="text-gradient font-semibold">AI</span>
                         </div>
                     </div>
                 </div>

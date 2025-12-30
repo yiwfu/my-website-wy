@@ -21,12 +21,6 @@ export default function Home() {
 
         <div className="relative z-10 container-modern text-center animate-fade-in">
           <div className="max-w-4xl mx-auto">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8 animate-scale-in">
-              <Sparkles className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium">AI 驱动的智能推荐</span>
-            </div>
-
             {/* Main Heading */}
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 animate-slide-up">
               探索城市的
@@ -35,7 +29,7 @@ export default function Home() {
 
             {/* Subtitle */}
             <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-12 leading-relaxed animate-slide-up" style={{ animationDelay: '0.2s' }}>
-              一站式城市生活指南，为您提供最权威的景点推荐、地道美食地图、优质房产信息及高薪职场机会
+              城市生活指南，为您提供最权威的景点推荐、地道美食地图、优质房产信息及高薪职场机会
             </p>
 
             {/* CTA Buttons */}
@@ -228,7 +222,7 @@ export default function Home() {
               准备好开始探索了吗？
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-12">
-              注册账号即可收藏您心仪的景点、职位和房源，并获取 AI 个性化推荐服务
+              注册账号即可收藏您心仪的景点、职位和房源，并获取个性化推荐服务
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
@@ -246,10 +240,6 @@ export default function Home() {
               <div className="flex items-center gap-2">
                 <CheckCircle className="w-5 h-5 text-green-500" />
                 <span className="text-sm">100% 免费使用</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="w-5 h-5 text-green-500" />
-                <span className="text-sm">AI 智能推荐</span>
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle className="w-5 h-5 text-green-500" />
